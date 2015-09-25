@@ -5,5 +5,5 @@ Usage:
 1. `bundle install`
 1. `touch serverlist`
 1. Add TeamCity server hostnames to `serverlist`, each on a new line
-1. `./generate-config.rb >> config.json`
+1. `./generate-config.rb > config.json`
 1. Put `config.json` in your Hound folder
