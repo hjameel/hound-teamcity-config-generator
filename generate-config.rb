@@ -11,7 +11,9 @@ teamcity_hosts.each do |teamcity_host|
   roots['vcs-root'].each do |root|
     root_info = JSON.parse((Faraday.get "http://#{teamcity_host}#{root['href']}", {}, {'Accept' => 'application/json'}).body)
 
-    if (root_info['project'] && root_info['project']['archived'])
+    teamcity8_archived = (root_info['project'] && root_info['project']['archived'])
+    teamcity7_archived = (root_info['status'] == 'NOT_MONITORED')
+    if (teamcity7_archived || teamcity8_archived)
       next
     end
 
