@@ -3,7 +3,7 @@ require 'faraday'
 require 'json'
 
 teamcity_hosts=File.readlines('serverlist').each{|server| server.chop!}
-config_body = { 'dbpath' => '../Hound-data', 'repos' => {} }
+config_body = { 'max-concurrent-indexers' => 8, 'dbpath' => '../data', 'repos' => {} }
 
 teamcity_hosts.each do |teamcity_host|
   roots = JSON.parse((Faraday.get "http://#{teamcity_host}/guestAuth/app/rest/vcs-roots", {}, {'Accept' => 'application/json'}).body)
